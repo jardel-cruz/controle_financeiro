@@ -1,3 +1,4 @@
+import { findReceitas } from "../../repository/receitas_repository/findReceitas.js";
 import type {
   ICreateReceitasArguments,
   ISaveReceiasArguments,
@@ -9,9 +10,11 @@ export const createReceitas = async (
 ) => {
   const { date, description, value } = data;
 
-  console.log(date, description, value);
-
   if (!date || !description || !value) throw new Error();
+
+  const conferi = await findReceitas({ description: description });
+
+  if (conferi.length > 0) throw new Error();
 
   const dataConvert: ISaveReceiasArguments = {
     date: new Date(date).getTime(),

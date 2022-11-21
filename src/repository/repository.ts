@@ -13,4 +13,6 @@ export const saveDocument = async (data: Data, model: Model<any>) => {
 
 export const findDocuments = async (filter: Data, model: Model<any>) => {
   const document = await model.find(filter);
+
+  return document;
 };
