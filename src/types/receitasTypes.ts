@@ -12,3 +12,8 @@ export interface IFindReceitasArguments {
   value?: number;
   date?: number;
 }
+
+export interface ICreateReceitasArguments
+  extends Omit<IFindReceitasArguments, "date"> {
+  date?: string;
+}
