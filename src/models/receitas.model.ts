@@ -19,7 +19,7 @@ const receitasSchema = new mongoose.Schema<IReceitas>(
     },
     date: {
       type: Number,
-      default: Date.now(),
+      required: true,
     },
   },
   {

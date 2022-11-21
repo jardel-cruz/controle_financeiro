@@ -19,7 +19,7 @@ const despesasSchema = new mongoose.Schema<IDespesas>(
     },
     date: {
       type: Number,
-      default: Date.now(),
+      required: true,
     },
   },
   {
