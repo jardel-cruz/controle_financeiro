@@ -4,16 +4,19 @@ import { createReceitas } from "../../services/receitas_services/createReceitas.
 
 export const addReceitaController: RequestHandler = async (req, res) => {
   try {
+    const { date, description, value } = req.body;
+
     const result = await createReceitas(
       {
-        date: new Date().toDateString(),
-        description: "Description2",
-        value: 30,
+        date,
+        description,
+        value,
       },
       saveReceitas
     );
-    res.status(201).json({ msg: result });
+
+    return res.status(201).json({ msg: result });
   } catch (error: unknown) {
-    res.status(400).json({ msg: error });
+    return res.status(400).json({ msg: error });
   }
 };

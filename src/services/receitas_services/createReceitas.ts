@@ -12,12 +12,13 @@ export const createReceitas = async (
 
   if (!date || !description || !value) throw new Error();
 
+  const dateParser = date.split("/").reverse().join("/");
   const conferi = await findReceitas({ description: description });
 
   if (conferi.length > 0) throw new Error();
 
   const dataConvert: ISaveReceiasArguments = {
-    date: new Date(date).getTime(),
+    date: new Date(dateParser).getTime(),
     description,
     value,
   };
