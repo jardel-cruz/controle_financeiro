@@ -1,12 +1,14 @@
 import express, { Application } from "express";
 import bodyParser from "body-parser";
 import { db } from "./configs/database-configs/mongooseConfig.js";
+import { routes } from "./routes/index.js";
 
 export const appConfigs = () => {
   const app = express();
 
   dbConfig();
   bodyParserConfigs(app);
+  routes(app);
 
   return app;
 };
