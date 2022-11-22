@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import { GenericError } from "../../helpers/erros.js";
 import { listAllReceitas } from "../../services/receitas_services/listAllReceitas.js";
 import { listReceitaById } from "../../services/receitas_services/listReceitaById.js";
 
@@ -10,6 +11,7 @@ export const listReceitas: RequestHandler = async (req, res) => {
 
     return res.status(200).json({ content: result });
   } catch (error) {
-    return res.status(500).json({ msg: "internal server error" });
+    const err = error as GenericError;
+    return res.status(err.code || 500).json({ msg: error });
   }
 };

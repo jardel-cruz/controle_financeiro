@@ -6,6 +6,7 @@ import type {
   ICreateReceitasArguments,
   ISaveReceiasArguments,
 } from "../../types/receitasTypes.js";
+import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 
 export const createReceitas = async (
   data: ICreateReceitasArguments,
@@ -15,17 +16,18 @@ export const createReceitas = async (
 
   const validatedDate = await validateDate(date);
 
-  if (!description || !value || !validatedDate) throw new Error();
+  if (!description || !value || !validatedDate)
+    triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);
 
-  if (await validateDateAndDescription(description, dateParser))
-    throw new Error();
+  if (await validateDateAndDescription(description!, dateParser))
+    triggerInvalidArgument("Argumentos inválidos");
 
   const dataConvert: ISaveReceiasArguments = {
     date: dateParser,
-    description,
-    value,
+    description: description!,
+    value: value!,
   };
 
   const resultSave = await save(dataConvert);

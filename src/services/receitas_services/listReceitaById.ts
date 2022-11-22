@@ -1,3 +1,4 @@
+import { triggerIdNotFound } from "../../helpers/triggerErrors.js";
 import { findReceitaById } from "../../repository/receitas_repository/findReceitaById.js";
 
 export const listReceitaById = async (id: string) => {
@@ -8,5 +9,5 @@ export const listReceitaById = async (id: string) => {
         description: receita.description,
         value: receita.value,
       }
-    : "Id not found";
+    : triggerIdNotFound();
 };

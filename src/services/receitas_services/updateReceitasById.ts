@@ -6,6 +6,7 @@ import { parserDate } from "../../utils/parserData.js";
 import { validateDate } from "../../utils/validateDate.js";
 import { validateDateAndDescription } from "../../utils/validateDateAndDescription.js";
 import { findByIdAndUpdateReceitas } from "../../repository/receitas_repository/findByIdAndUdateReceitas.js";
+import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 
 export const updateReceitasById = async (
   id: string,
@@ -15,17 +16,18 @@ export const updateReceitasById = async (
 
   const validatedDate = await validateDate(date);
 
-  if (!description || !value || !validatedDate) throw new Error();
+  if (!description || !value || !validatedDate)
+    triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);
 
-  if (await validateDateAndDescription(description, dateParser))
-    throw new Error();
+  if (await validateDateAndDescription(description!, dateParser))
+    triggerInvalidArgument("Argumentos inválidos");
 
   const dataConvert: ISaveReceiasArguments = {
     date: dateParser,
-    description,
-    value,
+    description: description!,
+    value: value!,
   };
 
   const result = await findByIdAndUpdateReceitas(id, dataConvert);
