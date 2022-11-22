@@ -16,3 +16,12 @@ export const findDocuments = async <T>(filter: Data, model: Model<T>) => {
 
   return document;
 };
+
+export const findDocumentById = async <T>(id: string, model: Model<T>) => {
+  try {
+    const result = await model.findById(id);
+    return result;
+  } catch (error) {
+    return undefined;
+  }
+};

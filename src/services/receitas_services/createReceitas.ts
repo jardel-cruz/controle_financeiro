@@ -1,4 +1,7 @@
-import { findReceitas } from "../../repository/receitas_repository/findReceitas.js";
+import { parserDate } from "../../utils/parserData.js";
+import { validateDate } from "../../utils/validateDate.js";
+import { validateDateAndDescription } from "../../utils/validateDateAndDescription.js";
+
 import type {
   ICreateReceitasArguments,
   ISaveReceiasArguments,
@@ -10,15 +13,17 @@ export const createReceitas = async (
 ) => {
   const { date, description, value } = data;
 
-  if (!date || !description || !value) throw new Error();
+  const validatedDate = await validateDate(date);
 
-  const dateParser = date.split("/").reverse().join("/");
-  const conferi = await findReceitas({ description: description });
+  if (!description || !value || !validatedDate) throw new Error();
 
-  if (conferi.length > 0) throw new Error();
+  const dateParser = await parserDate(date!);
+
+  if (await validateDateAndDescription(description, dateParser))
+    throw new Error();
 
   const dataConvert: ISaveReceiasArguments = {
-    date: new Date(dateParser).getTime(),
+    date: dateParser,
     description,
     value,
   };

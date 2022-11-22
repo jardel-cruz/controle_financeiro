@@ -2,7 +2,7 @@ import { Router } from "express";
 import { addReceitaController } from "../controllers/receitas_controllers/addReceita.js";
 import { listReceitas } from "../controllers/receitas_controllers/listReceitas.js";
 
-const receitasRouter = Router({ caseSensitive: true });
+const receitasRouter = Router({ caseSensitive: true, strict: true });
 
 receitasRouter
   .get("/receitas", listReceitas)
