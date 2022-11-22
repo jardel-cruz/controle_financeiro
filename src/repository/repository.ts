@@ -25,3 +25,17 @@ export const findDocumentById = async <T>(id: string, model: Model<T>) => {
     return undefined;
   }
 };
+
+export const updateDocumentById = async <T>(
+  id: string,
+  data: Data,
+  model: Model<T>
+) => {
+  try {
+    const document = await model.findByIdAndUpdate(id, data);
+
+    return document;
+  } catch (error) {
+    return undefined;
+  }
+};
