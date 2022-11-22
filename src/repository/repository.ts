@@ -39,3 +39,13 @@ export const updateDocumentById = async <T>(
     return undefined;
   }
 };
+
+export const deleteDocument = async <T>(id: string, model: Model<T>) => {
+  try {
+    const document = await model.findByIdAndDelete(id);
+
+    return document;
+  } catch (error) {
+    return undefined;
+  }
+};
