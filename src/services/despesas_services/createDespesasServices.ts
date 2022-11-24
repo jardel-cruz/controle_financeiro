@@ -7,11 +7,11 @@ import type {
   ISaveReceiasArguments,
 } from "../../types/receitasTypes.js";
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
-import { findReceitas } from "../../repository/receitas_repository/findReceitas.js";
+import { saveDespesas } from "../../repository/despesas_repository/saveDespesas.js";
+import { findDespesas } from "../../repository/despesas_repository/findDespesas.js";
 
-export const createReceitas = async (
-  data: ICreateReceitasArguments,
-  save: (data: ISaveReceiasArguments) => Promise<string | undefined>
+export const createDespesasServices = async (
+  data: ICreateReceitasArguments
 ) => {
   const { date, description, value } = data;
 
@@ -22,7 +22,7 @@ export const createReceitas = async (
 
   const dateParser = await parserDate(date!);
 
-  if (await validateDateAndDescription(description!, dateParser, findReceitas))
+  if (await validateDateAndDescription(description!, dateParser, findDespesas))
     triggerInvalidArgument("Argumentos inválidos");
 
   const dataConvert: ISaveReceiasArguments = {
@@ -31,7 +31,7 @@ export const createReceitas = async (
     value: value!,
   };
 
-  const resultSave = await save(dataConvert);
+  const resultSave = await saveDespesas(dataConvert);
 
   return resultSave;
 };
