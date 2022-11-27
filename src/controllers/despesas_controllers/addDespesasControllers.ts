@@ -4,8 +4,7 @@ import { createDespesasServices } from "../../services/despesas_services/createD
 
 export const addDespesasController: RequestHandler = async (req, res) => {
   try {
-    const { date, description, value } = req.body;
-
+    const { date, description, value, category } = req.body;
     const result = await createDespesasServices({
       date,
       description,

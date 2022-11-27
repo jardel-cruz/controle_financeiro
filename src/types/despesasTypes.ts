@@ -1,6 +1,8 @@
 import { IReceitas } from "./receitasTypes.js";
 
-export interface IDespesas extends IReceitas {}
+export interface IDespesas extends IReceitas {
+  categories: string;
+}
 
 export interface ISaveDespesasArguments extends Omit<IReceitas, "_id"> {}
 

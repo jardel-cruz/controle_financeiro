@@ -34,7 +34,7 @@ export const updateDocumentById = async <T>(
   try {
     const document = await model.findByIdAndUpdate(id, data);
 
-    return document?.id;
+    return document?.id as string;
   } catch (error) {
     return undefined;
   }

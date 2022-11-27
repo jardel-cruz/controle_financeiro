@@ -8,13 +8,7 @@ export const validateDateAndDescription = async (
   date: number,
   findDocument: (
     filter: IFindReceitasArguments | IFindDespesasArguments
-  ) => Promise<
-    (Document<unknown, any, IReceitas | IDespesas> &
-      IReceitas &
-      Required<{
-        _id: string;
-      }>)[]
-  >
+  ) => Promise<(Document<unknown, any, IReceitas | IDespesas> & IReceitas)[]>
 ) => {
   const conferi = await findDocument({ description });
 
