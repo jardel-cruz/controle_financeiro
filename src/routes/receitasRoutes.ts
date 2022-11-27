@@ -4,7 +4,7 @@ import { deleteReceitas } from "../controllers/receitas_controllers/deleteReceit
 import { listReceitas } from "../controllers/receitas_controllers/listReceitas.js";
 import { updateReceitas } from "../controllers/receitas_controllers/updateReceitas.js";
 
-const receitasRouter = Router({ caseSensitive: true, strict: true });
+const receitasRouter = Router({ caseSensitive: true });
 
 receitasRouter
   .get("/receitas", listReceitas)

@@ -4,7 +4,7 @@ import { deleteDespesasController } from "../controllers/despesas_controllers/de
 import { listDespesasController } from "../controllers/despesas_controllers/listDespesasController.js";
 import { updateDespesasController } from "../controllers/despesas_controllers/updateDespesasController.js";
 
-const despesasRouter = Router({ caseSensitive: true, strict: true });
+const despesasRouter = Router({ caseSensitive: true });
 
 despesasRouter
   .get("/despesas", listDespesasController)
