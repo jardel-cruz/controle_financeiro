@@ -6,8 +6,11 @@ import { listDespesasById } from "../../services/despesas_services/listDespesasB
 export const listDespesasController: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
+    const { descricao } = req.query;
 
-    const result = id ? await listDespesasById(id) : await listAllDespesas({});
+    const result = id
+      ? await listDespesasById(id)
+      : await listAllDespesas(descricao as string);
 
     return res.status(200).json({ content: result });
   } catch (error) {
