@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import type { IDespesas } from "../types/despesasTypes.js";
+import { Categories, IDespesas } from "../types/despesasTypes.js";
 
 const despesasSchema = new mongoose.Schema<IDespesas>(
   {
@@ -19,7 +19,7 @@ const despesasSchema = new mongoose.Schema<IDespesas>(
     categories: {
       type: String,
       required: true,
-      default: "outras",
+      default: Categories.outras,
     },
   },
   {

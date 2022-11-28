@@ -4,20 +4,22 @@ import { validateDateAndDescription } from "../../modules/validateDateAndDescrip
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 import { saveDespesas } from "../../repository/despesas_repository/saveDespesas.js";
 import { findDespesas } from "../../repository/despesas_repository/findDespesas.js";
-
+import { Categories } from "../../types/despesasTypes.js";
 import type {
-  ICreateReceitasArguments,
-  ISaveReceiasArguments,
-} from "../../types/receitasTypes.js";
+  ICreateDespesasArguments,
+  ISaveDespesasArguments,
+} from "../../types/despesasTypes.js";
+import { validateCategories } from "../../modules/validateCategories.js";
 
 export const createDespesasServices = async (
-  data: ICreateReceitasArguments
+  data: ICreateDespesasArguments
 ) => {
-  const { date, description, value } = data;
+  const { date, description, value, categories = Categories.outras } = data;
 
   const validatedDate = await validateDate(date);
+  const validatedCategories = await validateCategories(categories);
 
-  if (!description || !value || !validatedDate)
+  if (!description || !value || !validatedDate || !validatedCategories)
     triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);
@@ -25,10 +27,11 @@ export const createDespesasServices = async (
   if (await validateDateAndDescription(description!, dateParser, findDespesas))
     triggerInvalidArgument("Argumentos inválidos");
 
-  const dataConvert: ISaveReceiasArguments = {
+  const dataConvert: ISaveDespesasArguments = {
     date: dateParser,
     description: description!,
     value: value!,
+    categories: categories.toLowerCase() as Categories,
   };
 
   const resultSave = await saveDespesas(dataConvert);

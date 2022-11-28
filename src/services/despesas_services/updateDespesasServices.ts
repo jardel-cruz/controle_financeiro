@@ -4,17 +4,17 @@ import { validateDateAndDescription } from "../../modules/validateDateAndDescrip
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 import { findDespesas } from "../../repository/despesas_repository/findDespesas.js";
 import { findByIdAndUpdateDespesas } from "../../repository/despesas_repository/findByIdAndUpdateDespesas.js";
-
-import type {
-  ICreateReceitasArguments,
-  ISaveReceiasArguments,
-} from "../../types/receitasTypes.js";
+import { Categories } from "../../types/despesasTypes.js";
+import {
+  ICreateDespesasArguments,
+  ISaveDespesasArguments,
+} from "../../types/despesasTypes.js";
 
 export const updateDespesasServices = async (
   id: string,
-  data: ICreateReceitasArguments
+  data: ICreateDespesasArguments
 ) => {
-  const { date, description, value } = data;
+  const { date, description, value, categories = Categories.outras } = data;
 
   const validatedDate = await validateDate(date);
 
@@ -26,10 +26,11 @@ export const updateDespesasServices = async (
   if (await validateDateAndDescription(description!, dateParser, findDespesas))
     triggerInvalidArgument("Argumentos inválidos");
 
-  const dataConvert: ISaveReceiasArguments = {
+  const dataConvert: ISaveDespesasArguments = {
     date: dateParser,
     description: description!,
     value: value!,
+    categories,
   };
 
   const resultSave = await findByIdAndUpdateDespesas(id, dataConvert);
