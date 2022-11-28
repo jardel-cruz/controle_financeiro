@@ -1,9 +1,17 @@
 import { findReceitas } from "../../repository/receitas_repository/findReceitas.js";
-import type { IFindReceitasArguments } from "../../types/receitasTypes.js";
-import { filterResponseData } from "../../utils/callbacks.js";
+import {
+  filterDocumentsByDescription,
+  filterResponseData,
+} from "../../utils/callbacks.js";
 
-export const listAllReceitas = async (filter: IFindReceitasArguments) => {
-  const receitas = await findReceitas(filter);
+export const listAllReceitas = async (description?: string) => {
+  const receitas = await findReceitas({});
 
-  return receitas.map(filterResponseData);
+  if (description) {
+    const obj = await Promise.all(receitas.map(filterResponseData));
+    const result = obj.filter(filterDocumentsByDescription(description));
+    return result;
+  }
+
+  return Promise.all(receitas.map(filterResponseData));
 };

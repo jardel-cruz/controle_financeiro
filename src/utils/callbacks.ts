@@ -10,9 +10,9 @@ export const mapDateToBoolean = (item: string, index: number) => {
   return item.length === 2;
 };
 
-export const filterResponseData = (
+export const filterResponseData = async (
   item: (Document<IDespesas | IReceitas> & IDespesas) | IReceitas
-): IReceitas | IDespesas => {
+): Promise<IReceitas | IDespesas> => {
   const obj = item as IDespesas;
   if (obj.categories) {
     return {
@@ -29,3 +29,7 @@ export const filterResponseData = (
     } as IReceitas;
   }
 };
+
+export const filterDocumentsByDescription =
+  (description: string) => (item: IDespesas | IReceitas) =>
+    item.description.toLowerCase().includes(description);
