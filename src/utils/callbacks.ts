@@ -1,5 +1,5 @@
 import type { Document } from "mongoose";
-import { IDespesas } from "../types/despesasTypes.js";
+import { Categories, IDespesas } from "../types/despesasTypes.js";
 import type { IReceitas } from "../types/receitasTypes.js";
 
 export const filterFalseValues = (item: boolean) => item === false;
@@ -33,3 +33,21 @@ export const filterResponseData = async (
 export const filterDocumentsByDescription =
   (description: string) => (item: IDespesas | IReceitas) =>
     item.description.toLowerCase().includes(description);
+
+export const calcValueOfDocument = (
+  previousValue: number,
+  currentValue: IDespesas | IReceitas
+) => {
+  return previousValue + currentValue.value;
+};
+
+export const calcValueDocumentByCategory =
+  (category: Categories) =>
+  (previousValue: number, currentValue: IDespesas | IReceitas) => {
+    const { categories, value } = currentValue as IDespesas;
+    if (categories === category) {
+      return previousValue + value;
+    }
+
+    return previousValue;
+  };
