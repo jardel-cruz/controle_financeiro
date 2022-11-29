@@ -1,6 +1,6 @@
 import { filterFalseValues, mapDateToBoolean } from "../utils/callbacks.js";
 
-export const validateDate = async (date: string | undefined) => {
+export const validateDate = async (date?: string) => {
   if (!date) return false;
 
   const dateArray = date.split("/");
