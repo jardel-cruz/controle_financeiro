@@ -1,5 +1,6 @@
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 import { findReceitas } from "../../repository/receitas_repository/findReceitas.js";
+import { findReceitasByDate } from "../../repository/receitas_repository/findReceitasByDate.js";
 import { IFindReceitasArguments } from "../../types/receitasTypes.js";
 import { filterResponseData } from "../../utils/callbacks.js";
 
@@ -15,9 +16,7 @@ export const listReceitaByMonthService = async ({
   const date1 = new Date(`${year}/${month}/01`).getTime();
   const date2 = new Date(`${year}/${month}/30`).getTime();
 
-  const result = await findReceitas({
-    date: { $gt: date1, $lt: date2 },
-  } as any as IFindReceitasArguments);
+  const result = await findReceitasByDate(date1, date2);
 
   return result
     ? await Promise.all(result.map(filterResponseData))

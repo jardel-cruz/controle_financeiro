@@ -1,6 +1,5 @@
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
-import { findDespesas } from "../../repository/despesas_repository/findDespesas.js";
-import { IFindReceitasArguments } from "../../types/receitasTypes.js";
+import { findDespesasByDate } from "../../repository/despesas_repository/findDespesasByDate.js";
 import { filterResponseData } from "../../utils/callbacks.js";
 
 interface ListReceitaByMonth {
@@ -15,9 +14,7 @@ export const listDespesaByMonthService = async ({
   const date1 = new Date(`${year}/${month}/01`).getTime();
   const date2 = new Date(`${year}/${month}/30`).getTime();
 
-  const result = await findDespesas({
-    date: { $gt: date1, $lt: date2 },
-  } as any as IFindReceitasArguments);
+  const result = await findDespesasByDate(date1, date2);
 
   return result
     ? await Promise.all(result.map(filterResponseData))

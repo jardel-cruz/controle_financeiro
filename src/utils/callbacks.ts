@@ -6,8 +6,13 @@ export const filterFalseValues = (item: boolean) => item === false;
 
 export const mapDateToBoolean = (item: string, index: number) => {
   if (index === 2) return item.length === 4;
+  if (index === 1) {
+    const number = Number(item);
 
-  return item.length === 2;
+    return number >= 1 && number <= 12;
+  }
+  const number = Number(item);
+  return item.length === 2 && number >= 1 && number <= 31;
 };
 
 export const filterResponseData = async (
@@ -37,9 +42,7 @@ export const filterDocumentsByDescription =
 export const calcValueOfDocument = (
   previousValue: number,
   currentValue: IDespesas | IReceitas
-) => {
-  return previousValue + currentValue.value;
-};
+) => previousValue + currentValue.value;
 
 export const calcValueDocumentByCategory =
   (category: Categories) =>
