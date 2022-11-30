@@ -49,3 +49,13 @@ export const deleteDocument = async <T>(id: string, model: Model<T>) => {
     return undefined;
   }
 };
+
+export const findOneDocument = async <T>(data: Data, model: Model<T>) => {
+  try {
+    const document = await model.findOne(data);
+
+    return document;
+  } catch {
+    return undefined;
+  }
+};

@@ -11,6 +11,7 @@ export interface IFindDespesasArguments {
   value?: number;
   date?: number;
   categories?: Categories;
+  userId: string;
 }
 
 export interface ICreateDespesasArguments

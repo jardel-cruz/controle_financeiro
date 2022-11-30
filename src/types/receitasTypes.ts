@@ -2,6 +2,7 @@ export interface IReceitas {
   description: string;
   value: number;
   date: number;
+  userId: string;
 }
 
 export interface ISaveReceiasArguments extends Omit<IReceitas, "_id"> {}
@@ -10,6 +11,7 @@ export interface IFindReceitasArguments {
   description?: string;
   value?: number;
   date?: number;
+  userId: string;
 }
 
 export interface ICreateReceitasArguments

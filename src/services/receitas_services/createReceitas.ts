@@ -29,6 +29,7 @@ export const createReceitas = async (
     date: dateParser,
     description: description!,
     value: value!,
+    userId: "",
   };
 
   const resultSave = await save(dataConvert);

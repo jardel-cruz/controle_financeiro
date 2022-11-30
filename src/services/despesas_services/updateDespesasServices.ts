@@ -31,6 +31,7 @@ export const updateDespesasServices = async (
     description: description!,
     value: value!,
     categories,
+    userId: "",
   };
 
   const resultSave = await findByIdAndUpdateDespesas(id, dataConvert);

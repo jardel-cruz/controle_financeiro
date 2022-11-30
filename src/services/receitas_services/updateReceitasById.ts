@@ -32,6 +32,7 @@ export const updateReceitasById = async (
     date: dateParser,
     description: description!,
     value: value!,
+    userId: "",
   };
 
   const result = await findByIdAndUpdateReceitas(id, dataConvert);
