@@ -4,15 +4,20 @@ import { deleteReceitas } from "../controllers/receitas_controllers/deleteReceit
 import { listReceitas } from "../controllers/receitas_controllers/listReceitas.js";
 import { listReceitasByMonthController } from "../controllers/receitas_controllers/listReceitasByMonthController.js";
 import { updateReceitas } from "../controllers/receitas_controllers/updateReceitas.js";
+import { authorizationMiddleware } from "../middlewares/authorizationMiddleware.js";
 
 const receitasRouter = Router({ caseSensitive: true });
 
 receitasRouter
-  .get("/receitas", listReceitas)
-  .get("/receitas/:id", listReceitas)
-  .get("/receitas/:year/:month", listReceitasByMonthController)
-  .post("/receitas", addReceitaController)
-  .put("/receitas/:id", updateReceitas)
-  .delete("/receitas/:id", deleteReceitas);
+  .get("/receitas", authorizationMiddleware, listReceitas)
+  .get("/receitas/:id", authorizationMiddleware, listReceitas)
+  .get(
+    "/receitas/:year/:month",
+    authorizationMiddleware,
+    listReceitasByMonthController
+  )
+  .post("/receitas", authorizationMiddleware, addReceitaController)
+  .put("/receitas/:id", authorizationMiddleware, updateReceitas)
+  .delete("/receitas/:id", authorizationMiddleware, deleteReceitas);
 
 export { receitasRouter };

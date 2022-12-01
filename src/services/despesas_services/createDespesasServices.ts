@@ -14,12 +14,24 @@ import { validateCategories } from "../../modules/validateCategories.js";
 export const createDespesasServices = async (
   data: ICreateDespesasArguments
 ) => {
-  const { date, description, value, categories = Categories.outras } = data;
+  const {
+    date,
+    description,
+    value,
+    categories = Categories.outras,
+    userId,
+  } = data;
 
   const validatedDate = await validateDate(date);
   const validatedCategories = await validateCategories(categories);
 
-  if (!description || !value || !validatedDate || !validatedCategories)
+  if (
+    !description ||
+    !value ||
+    !validatedDate ||
+    !validatedCategories ||
+    !userId
+  )
     triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);
@@ -32,7 +44,7 @@ export const createDespesasServices = async (
     description: description!,
     value: value!,
     categories: categories.toLowerCase() as Categories,
-    userId: "",
+    userId: userId,
   };
 
   const resultSave = await saveDespesas(dataConvert);

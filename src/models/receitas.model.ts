@@ -16,6 +16,10 @@ const receitasSchema = new mongoose.Schema<IReceitas>(
       type: Number,
       required: true,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

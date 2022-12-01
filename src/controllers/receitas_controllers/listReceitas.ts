@@ -5,12 +5,12 @@ import { listReceitaById } from "../../services/receitas_services/listReceitaByI
 
 export const listReceitas: RequestHandler = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id, userId } = req.params;
     const { descricao } = req.query;
 
     const result = id
       ? await listReceitaById(id)
-      : await listAllReceitas(descricao as string);
+      : await listAllReceitas(userId, descricao as string);
 
     return res.status(200).json({ content: result });
   } catch (error) {

@@ -13,11 +13,11 @@ export const createReceitas = async (
   data: ICreateReceitasArguments,
   save: (data: ISaveReceiasArguments) => Promise<string | undefined>
 ) => {
-  const { date, description, value } = data;
+  const { date, description, value, userId } = data;
 
   const validatedDate = await validateDate(date);
 
-  if (!description || !value || !validatedDate)
+  if (!description || !value || !validatedDate || !userId)
     triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);
@@ -29,7 +29,7 @@ export const createReceitas = async (
     date: dateParser,
     description: description!,
     value: value!,
-    userId: "",
+    userId: userId,
   };
 
   const resultSave = await save(dataConvert);

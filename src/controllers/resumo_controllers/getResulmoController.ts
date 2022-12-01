@@ -4,8 +4,9 @@ import { buildResumo } from "../../services/resumo_services/buildResumoService.j
 
 export const getResumo: RequestHandler = async (req, res) => {
   try {
-    const { month, year } = req.params;
-    const result = month && year ? await buildResumo({ month, year }) : {};
+    const { month, year, userId } = req.params;
+    const result =
+      month && year ? await buildResumo({ month, year, userId }) : {};
 
     return res.status(200).json({ content: result });
   } catch (error) {

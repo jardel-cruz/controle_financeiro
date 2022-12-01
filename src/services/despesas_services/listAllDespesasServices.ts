@@ -4,8 +4,8 @@ import {
   filterResponseData,
 } from "../../utils/callbacks.js";
 
-export const listAllDespesas = async (description?: string) => {
-  const despesas = await findDespesas({});
+export const listAllDespesas = async (userId: string, description?: string) => {
+  const despesas = await findDespesas({ userId });
 
   if (description) {
     const obj = await Promise.all(despesas.map(filterResponseData));

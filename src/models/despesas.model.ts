@@ -21,6 +21,10 @@ const despesasSchema = new mongoose.Schema<IDespesas>(
       required: true,
       default: Categories.outras,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -5,12 +5,14 @@ import { createReceitas } from "../../services/receitas_services/createReceitas.
 export const addReceitaController: RequestHandler = async (req, res) => {
   try {
     const { date, description, value } = req.body;
+    const { userId } = req.params;
 
     const result = await createReceitas(
       {
         date,
         description,
         value,
+        userId,
       },
       saveReceitas
     );

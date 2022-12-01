@@ -7,9 +7,11 @@ export const listReceitasByMonthController: RequestHandler = async (
   res
 ) => {
   try {
-    const { year, month } = req.params;
+    const { year, month, userId } = req.params;
     const result =
-      year && month ? await listReceitaByMonthService({ month, year }) : [];
+      year && month
+        ? await listReceitaByMonthService({ month, year, userId })
+        : [];
 
     return res.status(200).json({ content: result });
   } catch (error) {

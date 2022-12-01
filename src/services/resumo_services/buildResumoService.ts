@@ -9,11 +9,16 @@ import { listReceitaByMonthService } from "../receitas_services/listReceitaByMon
 interface ListReceitaByMonth {
   year: string;
   month: string;
+  userId: string;
 }
 
-export const buildResumo = async ({ month, year }: ListReceitaByMonth) => {
-  const despesas = await listDespesaByMonthService({ month, year });
-  const receitas = await listReceitaByMonthService({ month, year });
+export const buildResumo = async ({
+  month,
+  year,
+  userId,
+}: ListReceitaByMonth) => {
+  const despesas = await listDespesaByMonthService({ month, year, userId });
+  const receitas = await listReceitaByMonthService({ month, year, userId });
 
   const totalValueDespesas = despesas.reduce(calcValueOfDocument, 0);
   const totalValueReceitas = receitas.reduce(calcValueOfDocument, 0);

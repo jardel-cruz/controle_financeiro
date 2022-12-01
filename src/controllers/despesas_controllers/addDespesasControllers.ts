@@ -5,11 +5,13 @@ import { createDespesasServices } from "../../services/despesas_services/createD
 export const addDespesasController: RequestHandler = async (req, res) => {
   try {
     const { date, description, value, categories } = req.body;
+    const { userId } = req.params;
     const result = await createDespesasServices({
       date,
       description,
       value,
       categories,
+      userId,
     });
 
     return res.status(201).json({ content: result });
