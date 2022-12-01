@@ -1,6 +1,5 @@
 import { ICreateUser } from "../../types/userTypes.js";
 import { validateUserData } from "../../modules/validateUserData.js";
-import { generateJwt } from "../../implementation/jwt_implementation/generateJwt.js";
 import { createHashPassword } from "../../implementation/hash_implementation/createHashPassword.js";
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 import { registerUser } from "../../repository/user_repository/registerUser.js";
@@ -24,18 +23,7 @@ export const createUserService = async ({
     password: hashPassword,
   });
 
-  const jwt = saveUser
-    ? await generateJwt({ id: saveUser }, genDuration())
+  return saveUser
+    ? "Success"
     : triggerInvalidArgument("Os dados passados são inválidos");
-
-  return jwt;
-};
-
-const genDuration = () => {
-  const dateNow = new Date();
-  const futureDate = `${dateNow.getFullYear()}/${dateNow.getMonth()}/${
-    dateNow.getDay() + 1
-  }`;
-
-  return new Date(futureDate).getTime();
 };

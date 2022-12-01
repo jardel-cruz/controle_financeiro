@@ -7,9 +7,7 @@ export const userRegistrationController: RequestHandler = async (req, res) => {
     const { name, email, password } = req.body;
     const result = await createUserService({ name, email, password });
 
-    res.set({ authorization: result });
-
-    return res.status(204).end();
+    return res.status(201).json({ content: result });
   } catch (error) {
     const err = error as GenericError;
 

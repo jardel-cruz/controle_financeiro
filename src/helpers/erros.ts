@@ -16,3 +16,9 @@ export class IdNotFoundError extends GenericError {
     super(400, msg);
   }
 }
+
+export class NotAuthorized extends GenericError {
+  constructor(public msg: string) {
+    super(403, msg);
+  }
+}
