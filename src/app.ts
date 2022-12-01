@@ -26,5 +26,9 @@ const dbConfig = () => {
 };
 
 const helmetConfig = (app: Application) => {
+  app.use(async (req, res, next) => {
+    req.params.userId = "";
+    return next();
+  });
   app.use(helmet());
 };
