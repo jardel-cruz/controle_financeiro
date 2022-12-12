@@ -1,7 +1,7 @@
 import { parserDate } from "../../modules/parserData.js";
 import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 import { saveDespesas } from "../../repository/despesas_repository/saveDespesas.js";
-import { Categories, SaveDespesasFunction } from "../../types/despesasTypes.js";
+import { Categories } from "../../types/despesasTypes.js";
 import type {
   ICreateDespesasArguments,
   ISaveDespesasArguments,
