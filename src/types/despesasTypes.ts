@@ -1,4 +1,4 @@
-import { IReceitas } from "./receitasTypes.js";
+import { ICreateReceitasArguments, IReceitas } from "./receitasTypes.js";
 
 export interface IDespesas extends IReceitas {
   categories: Categories;
@@ -31,3 +31,7 @@ export enum Categories {
   imprevistos = "imprevistos",
   outras = "outras",
 }
+
+export type SaveDespesasFunction = (
+  data: ICreateDespesasArguments
+) => Promise<string | undefined>;

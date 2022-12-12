@@ -18,3 +18,7 @@ export interface ICreateReceitasArguments
   extends Omit<IFindReceitasArguments, "date"> {
   date?: string;
 }
+
+export type SaveReceitasFunction = (
+  data: ICreateReceitasArguments
+) => Promise<string | undefined>;
