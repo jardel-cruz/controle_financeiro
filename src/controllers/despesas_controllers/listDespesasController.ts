@@ -9,7 +9,7 @@ export const listDespesasController: RequestHandler = async (req, res) => {
     const { descricao } = req.query;
 
     const result = id
-      ? await listDespesasById(id)
+      ? await listDespesasById(id, userId)
       : await listAllDespesas(userId, descricao as string);
 
     return res.status(200).json({ content: result });

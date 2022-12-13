@@ -9,7 +9,7 @@ export const listReceitas: RequestHandler = async (req, res) => {
     const { descricao } = req.query;
 
     const result = id
-      ? await listReceitaById(id)
+      ? await listReceitaById(id, userId)
       : await listAllReceitas(userId, descricao as string);
 
     return res.status(200).json({ content: result });
