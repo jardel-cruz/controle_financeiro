@@ -5,3 +5,5 @@ services:
     ports:
       - 3000:3000
     working_dir: /app
+    mem_limit: 2g
+    cpus: 1
