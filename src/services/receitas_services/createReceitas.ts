@@ -8,11 +8,13 @@ import type {
 } from "../../types/receitasTypes.js";
 import { validateAllData } from "../../modules/validateAllData.js";
 
-export const createReceitas = async (
-  { userId, date, description, value }: ICreateReceitasArguments,
-  save: (data: ISaveReceiasArguments) => Promise<string | undefined>
-) => {
-  (await validateAllData({ userId, date, description, value }, "receitas")) &&
+export const createReceitas = async ({
+  userId,
+  date,
+  description,
+  value,
+}: ICreateReceitasArguments) => {
+  !(await validateAllData({ userId, date, description, value }, "receitas")) &&
     triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);

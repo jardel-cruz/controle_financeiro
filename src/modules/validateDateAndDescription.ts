@@ -4,13 +4,14 @@ import { IFindReceitasArguments, IReceitas } from "../types/receitasTypes.js";
 import { compareDate } from "./compareDate.js";
 
 export const validateDateAndDescription = async (
+  userId: string,
   description: string,
   date: number,
   findDocument: (
     filter: IFindReceitasArguments | IFindDespesasArguments
   ) => Promise<(Document<unknown, any, IReceitas | IDespesas> & IReceitas)[]>
 ) => {
-  const conferi = await findDocument({ description });
+  const conferi = await findDocument({ description, userId });
 
   return conferi.filter((item) => compareDate(item.date, date)).length !== 0;
 };

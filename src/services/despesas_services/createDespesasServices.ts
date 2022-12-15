@@ -15,7 +15,7 @@ export const createDespesasServices = async ({
   categories = Categories.outras,
   userId,
 }: ICreateDespesasArguments) => {
-  (await validateAllData(
+  !(await validateAllData(
     { userId, categories, date, description, value },
     "despesas"
   )) && triggerInvalidArgument("Argumentos inválidos");

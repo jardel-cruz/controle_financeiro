@@ -6,12 +6,14 @@ import {
 
 export const listAllReceitas = async (userId: string, description?: string) => {
   const receitas = await findReceitas({ userId });
+  const result = await Promise.all(receitas.map(filterResponseData));
 
   if (description) {
-    const obj = await Promise.all(receitas.map(filterResponseData));
-    const result = obj.filter(filterDocumentsByDescription(description));
-    return result;
+    const arrayFilter = result.filter(
+      filterDocumentsByDescription(description)
+    );
+    return arrayFilter;
   }
 
-  return Promise.all(receitas.map(filterResponseData));
+  return result;
 };

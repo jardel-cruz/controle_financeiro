@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import { getEnvUsernameDb } from "../envs-configs/getEnvUsernameDb.js";
 import { getEnvPasswordDb } from "../envs-configs/getEnvPasswordDb.js";
 
+mongoose.set("strictQuery", true);
+
 const [userDb, passwordDb] = [
   await getEnvUsernameDb(),
   await getEnvPasswordDb(),

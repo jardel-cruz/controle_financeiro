@@ -8,9 +8,6 @@ const userRouter = Router({ caseSensitive: true });
 
 userRouter
   .post("/user", userRegistrationController)
-  .post("/login", loginUserMiddleware, loginController)
-  .get("/t", authorizationMiddleware, async (req, res) => {
-    return res.status(200).json({ msg: req.params.userId });
-  });
+  .post("/login", loginUserMiddleware, loginController);
 
 export { userRouter };

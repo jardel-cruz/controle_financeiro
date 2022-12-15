@@ -5,7 +5,8 @@
   "main": "src/server.ts",
   "type": "module",
   "scripts": {
-    "start": "nodemon src/server.ts",
+    "start": "npx ts-node --esm --transpileOnly src/server.ts",
+    "dev": "nodemon src/server.ts",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "compile": "tsc",
