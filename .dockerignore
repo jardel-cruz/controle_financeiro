@@ -1,0 +1,6 @@
+node_modules
+.gitignore
+nodemon.json
+README.md
+vite.config.ts
+src/modules/*.test.ts
