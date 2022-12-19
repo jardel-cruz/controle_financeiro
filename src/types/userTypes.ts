@@ -6,10 +6,6 @@ export interface IUser {
 
 export interface IRegisterUser extends IUser {}
 
-export interface ICreateUser {
-  name?: string;
-  email?: string;
-  password?: string;
-}
+export interface ICreateUser extends Partial<IUser> {}
 
 export interface IFindUser extends ICreateUser {}

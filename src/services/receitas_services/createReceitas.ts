@@ -23,7 +23,7 @@ export const createReceitas = async ({
     date: dateParser,
     description: description!,
     value: value!,
-    userId: userId,
+    userId: userId!,
   };
 
   const resultSave = await saveReceitas(dataConvert);

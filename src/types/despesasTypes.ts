@@ -1,4 +1,4 @@
-import { ICreateReceitasArguments, IReceitas } from "./receitasTypes.js";
+import { IReceitas } from "./receitasTypes.js";
 
 export interface IDespesas extends IReceitas {
   categories: Categories;
@@ -7,13 +7,7 @@ export interface IDespesas extends IReceitas {
 
 export interface ISaveDespesasArguments extends Omit<IDespesas, "_id"> {}
 
-export interface IFindDespesasArguments {
-  description?: string;
-  value?: number;
-  date?: number;
-  categories?: Categories;
-  userId: string;
-}
+export interface IFindDespesasArguments extends Partial<IDespesas> {}
 
 export interface ICreateDespesasArguments
   extends Omit<IFindDespesasArguments, "date"> {

@@ -27,7 +27,7 @@ export const createDespesasServices = async ({
     description: description!,
     value: value!,
     categories: categories.toLowerCase() as Categories,
-    userId: userId,
+    userId: userId!,
   };
 
   const resultSave = await saveDespesas(dataConvert);

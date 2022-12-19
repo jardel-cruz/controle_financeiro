@@ -1,41 +1,31 @@
 import { parserDate } from "../../modules/parserData.js";
-import { validateDate } from "../../modules/validateDate.js";
-import { validateDateAndDescription } from "../../modules/validateDateAndDescription.js";
 import { findByIdAndUpdateReceitas } from "../../repository/receitas_repository/findByIdAndUdateReceitas.js";
-import { findReceitas } from "../../repository/receitas_repository/findReceitas.js";
-import {
-  triggerIdNotFound,
-  triggerInvalidArgument,
-} from "../../helpers/triggerErrors.js";
+import { triggerInvalidArgument } from "../../helpers/triggerErrors.js";
 import type {
   ICreateReceitasArguments,
   ISaveReceiasArguments,
 } from "../../types/receitasTypes.js";
+import { validateAllData } from "../../modules/validateAllData.js";
 
 export const updateReceitasById = async (
   id: string,
   data: ICreateReceitasArguments
 ) => {
-  const { date, description, value } = data;
+  const { date, description, value, userId } = data;
 
-  const validatedDate = await validateDate(date);
-
-  if (!description || !value || !validatedDate)
+  !(await validateAllData({ userId, date, description, value }, "despesas")) &&
     triggerInvalidArgument("Argumentos inválidos");
 
   const dateParser = await parserDate(date!);
-
-  if (await validateDateAndDescription(description!, dateParser, findReceitas))
-    triggerInvalidArgument("Argumentos inválidos");
 
   const dataConvert: ISaveReceiasArguments = {
     date: dateParser,
     description: description!,
     value: value!,
-    userId: "",
+    userId: userId!,
   };
 
-  const result = await findByIdAndUpdateReceitas(id, dataConvert);
+  const resultSave = await findByIdAndUpdateReceitas(id, dataConvert);
 
-  return result;
+  return resultSave;
 };
