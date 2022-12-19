@@ -1,1 +1,5 @@
-{ "execMap" : { "ts" : "ts-node --esm --transpileOnly" } }
+{
+  "execMap": {
+    "ts": "ts-node --esm --transpileOnly"
+  }
+}

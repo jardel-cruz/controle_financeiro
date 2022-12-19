@@ -4,3 +4,5 @@ nodemon.json
 README.md
 vite.config.ts
 src/modules/*.test.ts
+src
+tsconfg.json

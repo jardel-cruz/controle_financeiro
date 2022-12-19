@@ -8,6 +8,10 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "./content",
-  }
+    "rootDir": "./",
+    "outDir": "./dist",
+    "sourceMap": true,
+  },
+  "exclude": ["*.ts", "src/modules/*.test.ts"],
+  "include": ["src"]
 }

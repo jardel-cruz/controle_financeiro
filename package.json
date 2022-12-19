@@ -1,13 +1,14 @@
 {
-  "name": "programacao-funcional",
+  "name": "api-desafio",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.ts",
   "type": "module",
   "scripts": {
-    "start": "npx ts-node --esm --transpileOnly src/server.ts",
+    "start": "node dist/src/server.js",
     "dev": "nodemon src/server.ts",
     "test": "vitest",
+    "up": "tsc && sudo docker compose up --build -d",
     "coverage": "vitest run --coverage",
     "compile": "tsc",
     "test:car": "autocannon -c 500 -d 30 --workers 10 --renderStatusCodes --latency --warmap [ -c 1 -d 2] localhost:3000/usuario/634363cf72abcc49f276bacf"
